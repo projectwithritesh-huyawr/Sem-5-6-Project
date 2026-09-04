@@ -1,0 +1,89 @@
+.fines-page {
+  padding: 30px;
+  background: #f5f7fb;
+  min-height: calc(100vh - 70px);
+}
+
+.fines-header {
+  margin-bottom: 25px;
+}
+
+.fines-header h1 {
+  margin: 0;
+  color: #222;
+}
+
+.fines-header p {
+  color: #666;
+  margin-top: 8px;
+}
+
+.fines-table-container {
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  overflow-x: auto;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+.fines-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.fines-table th {
+  background: #4f46e5;
+  color: white;
+  padding: 14px;
+  text-align: left;
+}
+
+.fines-table td {
+  padding: 14px;
+  border-bottom: 1px solid #eee;
+  color: #444;
+}
+
+.fines-table tr:hover {
+  background: #f8f8ff;
+}
+
+.fine-paid {
+  background: #dcfce7;
+  color: #166534;
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-weight: 600;
+}
+
+.fine-unpaid {
+  background: #fee2e2;
+  color: #991b1b;
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-weight: 600;
+}
+
+.pay-fine-btn {
+  border: none;
+  background: #16a34a;
+  color: white;
+  padding: 9px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.pay-fine-btn:hover {
+  background: #15803d;
+}
+
+.paid-date {
+  color: #166534;
+  font-weight: 600;
+}
+
+.no-fines {
+  text-align: center;
+  padding: 30px !important;
+  color: #777 !important;
+}

@@ -1,0 +1,100 @@
+.notification-host {
+    position: fixed;
+    top: 24px;
+    right: 24px;
+    z-index: 1000;
+    width: min(420px, calc(100vw - 32px));
+}
+
+.site-notification {
+    display: flex;
+    align-items: flex-start;
+    gap: 13px;
+    padding: 17px 18px;
+    border-left: 5px solid #315b48;
+    border-radius: 12px;
+    background: #fffdf9;
+    box-shadow: 0 16px 40px rgba(25, 35, 31, .22);
+    animation: notification-in .35s ease both;
+}
+
+.site-notification-icon {
+    display: grid;
+    flex: 0 0 28px;
+    place-items: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: #315b48;
+    color: #fff;
+    font: bold 16px Arial, sans-serif;
+}
+
+.site-notification h2 {
+    margin: 1px 0 4px;
+    color: #19231f;
+    font: 600 16px Arial, sans-serif;
+}
+
+.site-notification p {
+    margin: 0;
+    color: #69736b;
+    font: 13px/1.45 Arial, sans-serif;
+}
+
+.site-notification button {
+    margin-left: auto;
+    border: 0;
+    background: transparent;
+    color: #69736b;
+    cursor: pointer;
+    font-size: 22px;
+    line-height: 1;
+}
+
+.confirm-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 1001;
+    display: grid;
+    place-items: center;
+    background: rgba(25, 35, 31, .35);
+}
+
+.confirm-dialog {
+    width: min(390px, calc(100vw - 32px));
+    padding: 28px;
+    border-radius: 14px;
+    background: #fffdf9;
+    box-shadow: 0 20px 50px rgba(25, 35, 31, .25);
+    text-align: center;
+    animation: notification-in .25s ease both;
+}
+
+.confirm-icon {
+    display: grid;
+    place-items: center;
+    width: 42px;
+    height: 42px;
+    margin: 0 auto 12px;
+    border-radius: 50%;
+    background: #e9c46a;
+    color: #315b48;
+    font: bold 23px Georgia, serif;
+}
+
+.confirm-dialog h2 { margin: 0 0 8px; color: #19231f; font: 600 20px Arial, sans-serif; }
+.confirm-dialog p { margin: 0; color: #69736b; font: 14px/1.5 Arial, sans-serif; }
+.confirm-actions { display: flex; justify-content: center; gap: 10px; margin-top: 24px; }
+.confirm-actions button { margin: 0; padding: 10px 16px; border-radius: 6px; cursor: pointer; font: 600 13px Arial, sans-serif; }
+.confirm-cancel { border: 1px solid #cfd2cc; background: #fff; color: #536057; }
+.confirm-ok { border: 0; background: #315b48; color: #fff; }
+
+@keyframes notification-in {
+    from { opacity: 0; transform: translateY(-14px) translateX(10px); }
+    to { opacity: 1; transform: translateY(0) translateX(0); }
+}
+
+@media (max-width: 600px) {
+    .notification-host { top: 16px; right: 16px; }
+}

@@ -1,0 +1,85 @@
+.dashboard-content {
+  margin-left: 270px;
+  min-height: 100vh;
+  padding: 30px;
+  background:
+    radial-gradient(circle at 92% 4%, rgba(255,213,79,.16), transparent 22%),
+    linear-gradient(135deg, #f7fbff 0%, #eef5f3 55%, #f8f4ed 100%);
+  animation: content-enter .55s ease both;
+}
+
+.dashboard-content h1 {
+  margin-bottom: 30px;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(2, 250px);
+  gap: 20px;
+}
+
+.card {
+  background: white;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0,0,0,.2);
+  text-align: center;
+  animation: card-enter .5s ease both;
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+
+.card:nth-child(2) { animation-delay: .08s; }
+.card:nth-child(3) { animation-delay: .16s; }
+.card:nth-child(4) { animation-delay: .24s; }
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 24px rgba(13,71,161,.18);
+}
+
+.card h2 {
+  color: #0d47a1;
+}
+.recent-activity{
+    margin-top:40px;
+    background:white;
+    padding:20px;
+    border-radius:12px;
+    box-shadow:0 5px 15px rgba(0,0,0,.15);
+    animation: content-enter .65s .18s ease both;
+}
+
+.recent-activity h2{
+    margin-bottom:20px;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+th{
+    background:#0d47a1;
+    color:white;
+    padding:15px;
+}
+
+td{
+    padding:15px;
+    border-bottom:1px solid #ddd;
+    text-align:center;
+}
+
+tr:hover{
+    background:#f5f5f5;
+}
+
+@keyframes content-enter {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes card-enter {
+  from { opacity: 0; transform: translateY(18px) scale(.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}

@@ -1,0 +1,22 @@
+.back-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: #315b48;
+  color: white;
+  border: 1px solid rgba(255,255,255,.16);
+  padding: 10px 16px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-bottom: 20px;
+  box-shadow: 0 5px 12px rgba(49,91,72,.16);
+  transition: .2s ease;
+}
+
+.back-button:hover {
+  background: #244837;
+  transform: translateX(-3px);
+  box-shadow: 0 8px 16px rgba(49,91,72,.22);
+}

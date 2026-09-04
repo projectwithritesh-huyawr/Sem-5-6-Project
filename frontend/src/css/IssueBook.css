@@ -1,0 +1,247 @@
+.main-content {
+    min-height: 100vh;
+    margin-left: 240px;
+    padding: 30px;
+    background: radial-gradient(circle at 92% 4%, rgba(255, 213, 79, .16), transparent 22%), linear-gradient(135deg, #f7fbff 0%, #eef5f3 55%, #f8f4ed 100%);
+    animation: issue-content-enter .55s ease both;
+}
+
+.issue-header { margin-top: 20px; }
+.issue-header h1 { color: #19231f; letter-spacing: -.3px; }
+
+
+
+.issue-form {
+    margin-top: 30px;
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    border: 1px solid rgba(49, 91, 72, .08);
+    box-shadow: 0 12px 28px rgba(35, 56, 47, .12);
+    max-width: 700px;
+    animation: issue-card-enter .55s .08s ease both;
+}
+
+.issue-form h2 {
+    color: #315b48;
+    margin-bottom: 25px;
+}
+
+.issue-form form {
+    display: grid;
+    gap: 20px;
+}
+
+.date-field {
+    position: relative;
+    display: grid;
+    gap: 10px;
+    margin-top: 5px;
+}
+
+.date-field label {
+    position: relative;
+    z-index: 1;
+    width: fit-content;
+    margin-left: 10px;
+    padding: 3px 8px;
+    border-radius: 4px;
+    background: #315b48;
+    color: #fff;
+    font: 700 12px Arial, sans-serif;
+    letter-spacing: .2px;
+}
+
+.issue-form input,
+.issue-form select {
+    padding: 12px;
+    border: 1px solid #d4ddd7;
+    border-radius: 6px;
+    font-size: 16px;
+    outline: none;
+    background: #fffdf9;
+    transition: border-color .2s ease, box-shadow .2s ease;
+}
+
+.issue-form input:focus,
+.issue-form select:focus {
+    border-color: #315b48;
+    box-shadow: 0 0 0 3px rgba(49, 91, 72, .1);
+}
+
+.issue-form button {
+    padding: 12px;
+    background: #315b48;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: transform .2s ease, background .2s ease, box-shadow .2s ease;
+}
+
+.issue-form button:hover {
+    background: #244837;
+    transform: translateY(-2px);
+    box-shadow: 0 7px 14px rgba(49, 91, 72, .2);
+}
+
+
+
+
+.issued-books {
+    margin-top: 30px;
+    margin-bottom: 40px;
+
+    background: white;
+
+    padding: 25px;
+
+    border-radius: 12px;
+
+    border: 1px solid rgba(49, 91, 72, .08);
+    box-shadow: 0 12px 28px rgba(35, 56, 47, .12);
+
+    width: 100%;
+
+    box-sizing: border-box;
+    animation: issue-card-enter .55s .18s ease both;
+}
+
+.issued-books h2 {
+    color: #315b48;
+
+    margin: 0 0 20px 0;
+
+    font-size: 24px;
+}
+
+.issued-books-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.issued-books-heading h2 {
+    margin: 0;
+}
+
+.clear-history-btn {
+    padding: 9px 13px;
+    border: 1px solid #c62828;
+    border-radius: 6px;
+    background: #fff;
+    color: #c62828;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 600;
+    transition: background .2s ease, transform .2s ease;
+}
+
+.clear-history-btn:hover {
+    background: #fff3f3;
+    transform: translateY(-2px);
+}
+
+.table-container {
+    width: 100%;
+
+    overflow-x: auto;
+}
+
+.issued-books table {
+    width: 100%;
+
+    border-collapse: collapse;
+}
+
+.issued-books th {
+    background: #315b48;
+
+    color: white;
+
+    padding: 14px 12px;
+
+    text-align: left;
+
+    font-size: 15px;
+}
+
+.issued-books td {
+    padding: 13px 12px;
+
+    border-bottom: 1px solid #ddd;
+
+    color: #333;
+
+    font-size: 15px;
+}
+
+.issued-books tbody tr:hover {
+    background: #f1f7f3;
+}
+
+
+
+
+.status-issued {
+    display: inline-block;
+
+    padding: 5px 12px;
+
+    background: #e8f5e9;
+
+    color: #2e7d32;
+
+    border-radius: 20px;
+
+    font-weight: 600;
+
+    font-size: 13px;
+}
+
+
+
+.no-books {
+    text-align: center;
+
+    padding: 25px !important;
+
+    color: #777 !important;
+}
+.return-btn {
+    padding: 7px 12px;
+    background: #2e7d32;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.return-btn:hover {
+    background: #1b5e20;
+    transform: translateY(-2px);
+}
+
+.returned {
+    color: #2e7d32;
+    font-weight: 600;
+}
+
+@keyframes issue-content-enter {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes issue-card-enter {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 768px) {
+    .main-content { margin-left: 0; padding: 18px; }
+
+    .issued-books-heading { align-items: flex-start; flex-direction: column; }
+}

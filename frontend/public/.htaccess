@@ -1,0 +1,9 @@
+RewriteEngine On
+
+# Let Apache serve real assets and the backend directory directly.
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+# Support React Router routes on refresh.
+RewriteRule ^ index.html [L]

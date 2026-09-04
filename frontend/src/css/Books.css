@@ -1,0 +1,79 @@
+.main-content{
+    margin-left:240px;
+    padding:30px;
+    background:#f5f7fb;
+    min-height:100vh;
+}
+
+.book-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.book-header button {
+    background: #0d47a1;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.book-header button:hover {
+    background: #1565c0;
+}
+
+.book-table {
+    margin-top: 30px;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, .15);
+}
+
+.book-table table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.book-table th {
+    background: #0d47a1;
+    color: white;
+    padding: 14px;
+}
+
+.book-table td {
+    padding: 14px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+}
+
+.book-table td button {
+    margin: 0 5px;
+    padding: 8px 14px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.book-table td button:first-child {
+    background: #ffc107;
+}
+
+.book-table td button:last-child {
+    background: #dc3545;
+    color: white;
+}
+.add-book,
+.book-table{
+    width:90%;
+    max-width:1100px;
+    margin:30px auto;
+}
+
+.book-table table{
+    width:100%;
+}

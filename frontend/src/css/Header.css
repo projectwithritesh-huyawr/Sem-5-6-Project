@@ -1,0 +1,240 @@
+.header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    min-height:58px;
+    margin-bottom:26px;
+    padding:10px 14px 10px 18px;
+    border:1px solid rgba(49,91,72,.08);
+    border-radius:14px;
+    background:rgba(255,253,249,.72);
+    box-shadow:0 8px 22px rgba(35,56,47,.08);
+    backdrop-filter:blur(10px);
+    animation: header-enter .45s ease both;
+}
+
+.header-left h1 {
+    margin:0 0 4px;
+    color:#19231f;
+    font-size:28px;
+    letter-spacing:-.4px;
+}
+
+.header-left p {
+    margin:0;
+    color:#69736b;
+    font-size:13px;
+}
+
+.header-right{
+    display:flex;
+    align-items:center;
+    gap:20px;
+}
+
+.header-right input{
+    padding:11px 15px;
+    border-radius:7px;
+    border:1px solid #d4ddd7;
+    width:220px;
+    outline:none;
+    background:#fffdf9;
+}
+
+.header-right input:focus {
+    border-color:#315b48;
+    box-shadow:0 0 0 3px rgba(49,91,72,.1);
+}
+
+.notification{
+    font-size:24px;
+    cursor:pointer;
+    transition:transform .2s ease;
+}
+
+.notification:hover {
+    transform:translateY(-2px) rotate(8deg);
+}
+
+.header-right img{
+    width:45px;
+    height:45px;
+    border-radius:50%;
+    object-fit:cover;
+    border:2px solid #fffdf9;
+    box-shadow:0 3px 10px rgba(35,56,47,.2);
+}
+
+.profile-button {
+    padding:0;
+    border:0;
+    border-radius:50%;
+    background:transparent;
+    cursor:pointer;
+    transition:transform .25s ease, box-shadow .25s ease;
+}
+
+.profile-button:hover {
+    transform:translateY(-2px);
+    box-shadow:0 5px 14px rgba(13,71,161,.25);
+}
+
+.profile-button:focus-visible {
+    outline:3px solid #ffd54f;
+    outline-offset:3px;
+}
+
+.profile-modal-backdrop {
+    position:fixed;
+    inset:0;
+    z-index:10;
+    display:flex;
+    align-items:flex-start;
+    justify-content:flex-end;
+    padding:90px 30px 30px;
+    background:rgba(0, 0, 0, 0.35);
+    animation:modal-fade .2s ease both;
+}
+
+.profile-modal {
+    position:relative;
+    width:min(360px, 100%);
+    padding:28px;
+    border-radius:12px;
+    background:#fff;
+    border:1px solid rgba(49,91,72,.1);
+    box-shadow:0 18px 45px rgba(0, 0, 0, 0.22);
+    text-align:center;
+    animation:modal-enter .3s ease both;
+}
+
+.profile-close {
+    position:absolute;
+    top:10px;
+    right:14px;
+    border:0;
+    background:transparent;
+    color:#555;
+    font-size:28px;
+    cursor:pointer;
+}
+
+.profile-modal-image {
+    width:86px !important;
+    height:86px !important;
+    margin-bottom:10px;
+    border:3px solid #0d47a1;
+    object-fit:cover;
+}
+
+.profile-modal h2 {
+    margin:4px 0;
+    color:#111;
+}
+
+.profile-modal-role {
+    margin:0 0 20px;
+    color:#666;
+}
+
+.profile-details {
+    text-align:left;
+}
+
+.profile-detail-row {
+    display:flex;
+    justify-content:space-between;
+    gap:18px;
+    padding:11px 0;
+    border-bottom:1px solid #eee;
+}
+
+.profile-detail-row span {
+    color:#666;
+}
+
+.profile-detail-row strong {
+    color:#111;
+    overflow-wrap:anywhere;
+    text-align:right;
+}
+
+.remove-profile-button {
+    width:100%;
+    margin-top:22px;
+    padding:10px 14px;
+    border:1px solid #c62828;
+    border-radius:6px;
+    background:#fff;
+    color:#c62828;
+    cursor:pointer;
+    font-weight:600;
+}
+
+.remove-profile-button:hover {
+    background:#fff3f3;
+}
+
+.password-form {
+    margin-top:24px;
+    padding-top:20px;
+    border-top:1px solid #eee;
+    text-align:left;
+}
+
+.password-form h3 {
+    margin:0 0 12px;
+    color:#111;
+}
+
+.password-form input {
+    box-sizing:border-box;
+    width:100%;
+    margin:6px 0;
+    padding:10px 12px;
+    border:1px solid #d5d5d5;
+    border-radius:6px;
+}
+
+.password-form button {
+    width:100%;
+    margin-top:8px;
+    padding:10px;
+    border:0;
+    border-radius:6px;
+    background:#0d47a1;
+    color:#fff;
+    cursor:pointer;
+    font-weight:600;
+}
+
+.password-message {
+    margin:10px 0 0;
+    color:#555;
+    font-size:13px;
+}
+
+@media (max-width:600px) {
+    .profile-modal-backdrop {
+        padding:80px 16px 16px;
+    }
+
+    .profile-modal {
+        width:100%;
+    }
+}
+
+@keyframes header-enter {
+    from { opacity:0; transform:translateY(-10px); }
+    to { opacity:1; transform:translateY(0); }
+}
+
+@keyframes modal-fade {
+    from { opacity:0; }
+    to { opacity:1; }
+}
+
+@keyframes modal-enter {
+    from { opacity:0; transform:translateY(-12px) scale(.98); }
+    to { opacity:1; transform:translateY(0) scale(1); }
+}

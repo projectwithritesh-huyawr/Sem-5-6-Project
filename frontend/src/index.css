@@ -1,0 +1,226 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+    width: 100%;
+    min-height: 100vh;
+}
+
+:root {
+    --premium-forest: #0d47a1;
+    --premium-green: #1554ad;
+    --premium-cream: #f5f7fa;
+    --premium-terracotta: #0d47a1;
+    --premium-gold: #ffd54f;
+    --premium-ink: #172437;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f5f5f5;
+    color: #17202a;
+    -webkit-font-smoothing: antialiased;
+    background:
+        radial-gradient(circle at 92% 4%, rgba(225, 183, 94, .18), transparent 22%),
+        linear-gradient(135deg, #f7faff 0%, #edf3f8 55%, #f6f3ed 100%);
+}
+
+/* Keep every app page on the same premium canvas. */
+.main-content,
+.about,
+.fines-page,
+.return-book-page,
+.student-books-page,
+.student-main-content,
+.dashboard-content {
+    background:
+        radial-gradient(circle at 92% 4%, rgba(225, 183, 94, .18), transparent 22%),
+        radial-gradient(circle at 8% 92%, rgba(47, 82, 111, .12), transparent 28%),
+        linear-gradient(135deg, #f7faff 0%, #edf3f8 55%, #f6f3ed 100%) !important;
+}
+
+/* Shared premium palette across the application. */
+.sidebar,
+.navbar {
+    background: linear-gradient(160deg, var(--premium-forest), var(--premium-green)) !important;
+}
+
+.login-intro,
+.register-intro {
+    background: linear-gradient(160deg, var(--premium-forest), var(--premium-green)) !important;
+}
+
+.sidebar ul li a.active,
+.back-button,
+.issue-form button,
+.password-form button,
+.confirm-ok,
+.add-book-form button,
+.add-student button,
+.approve-btn,
+.reapprove-btn,
+.pay-fine-btn,
+.issue-book-btn,
+.return-book-btn,
+.edit-btn,
+.student-books th,
+.issued-books th,
+.pending-table-container th,
+.rejected-table-container th,
+.fines-table th,
+.book-table th,
+.student-table th {
+    background: var(--premium-green) !important;
+}
+
+.back-button:hover,
+.issue-form button:hover,
+.password-form button:hover,
+.confirm-ok:hover {
+    background: var(--premium-forest) !important;
+}
+
+.profile-modal-image,
+.login-notice,
+.site-notification {
+    border-color: var(--premium-gold) !important;
+}
+
+.notice-icon,
+.site-notification-icon {
+    background: var(--premium-green) !important;
+}
+
+.login-submit,
+.register-submit {
+    background: var(--premium-terracotta) !important;
+}
+
+.login-submit:hover,
+.register-submit:hover {
+    background: #bb654c !important;
+}
+
+.dashboard-content h1,
+.issue-header h1,
+.issue-form h2,
+.issued-books h2,
+.student-welcome h1,
+.student-profile h2,
+.student-books h2,
+.books-header h1,
+.book-header h1,
+.student-header h1,
+.fines-header h1,
+.pending-header h1,
+.rejected-header h1,
+.about h1,
+.features h2,
+.latest-books h2,
+.card h2,
+.student-stat-card h2,
+.feature-card h3,
+.about-card h2 {
+    color: var(--premium-green) !important;
+}
+
+.fine-paid,
+.status-issued,
+.student-status-issued {
+    color: var(--premium-green) !important;
+}
+
+.profile-image-picker span,
+.student-profile-picker span,
+.confirm-icon {
+    background: var(--premium-gold) !important;
+}
+
+button,
+a,
+input {
+    transition: color .2s ease, background-color .2s ease, border-color .2s ease, box-shadow .2s ease, transform .2s ease;
+}
+
+button:active,
+a:active {
+    transform: scale(.98);
+}
+
+::selection {
+    background: #ffd54f;
+    color: #17202a;
+}
+
+/* Shared page motion for all content sections. */
+.main-content > *,
+.student-main-content > *,
+.about > *,
+.features,
+.latest-books,
+.facts,
+.feature-card,
+.about-card,
+.student-book-card,
+.return-book-card,
+.student-stat-card {
+    animation: section-reveal .6s ease both;
+}
+
+.main-content > *:nth-child(2),
+.student-main-content > *:nth-child(2),
+.feature-card:nth-child(2),
+.about-card:nth-child(2),
+.student-book-card:nth-child(2),
+.return-book-card:nth-child(2) {
+    animation-delay: .08s;
+}
+
+.main-content > *:nth-child(3),
+.student-main-content > *:nth-child(3),
+.feature-card:nth-child(3),
+.about-card:nth-child(3),
+.student-book-card:nth-child(3),
+.return-book-card:nth-child(3) {
+    animation-delay: .16s;
+}
+
+.feature-card,
+.about-card,
+.student-book-card,
+.return-book-card,
+.student-stat-card,
+.facts .card {
+    transition: transform .25s ease, box-shadow .25s ease;
+}
+
+.feature-card:hover,
+.about-card:hover,
+.student-book-card:hover,
+.return-book-card:hover,
+.student-stat-card:hover,
+.facts .card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 24px rgba(35, 56, 47, .16);
+}
+
+@keyframes section-reveal {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: .01ms !important;
+    }
+}

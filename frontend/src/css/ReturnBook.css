@@ -1,0 +1,136 @@
+.return-book-page {
+    min-height: 100vh;
+    padding: 35px 40px;
+    background: #f5f7fb;
+    box-sizing: border-box;
+}
+
+.return-book-container {
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.return-book-container h1 {
+    font-size: 34px;
+    margin-bottom: 8px;
+    color: #172033;
+}
+
+.return-book-student-name {
+    font-size: 18px;
+    color: #555;
+    margin-bottom: 30px;
+}
+
+.return-book-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 22px;
+}
+
+.return-book-card {
+    background: white;
+    border-radius: 14px;
+    padding: 24px;
+    box-shadow: 0 5px 18px rgba(0, 0, 0, 0.08);
+    border: 1px solid #e8eaf0;
+    transition: 0.25s ease;
+}
+
+.return-book-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+}
+
+.return-book-card h2 {
+    margin: 0 0 18px;
+    font-size: 23px;
+    color: #172033;
+}
+
+.return-book-info {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 20px;
+}
+
+.return-book-info p {
+    margin: 0;
+    font-size: 15px;
+    color: #555;
+}
+
+.return-book-info strong {
+    color: #222;
+}
+
+.return-status {
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.return-status-issued {
+    background: #e8f1ff;
+    color: #1557b0;
+}
+
+.return-status-overdue {
+    background: #ffe7e7;
+    color: #d93025;
+}
+
+.return-book-btn {
+    width: 100%;
+    padding: 11px 16px;
+    border: none;
+    border-radius: 8px;
+    background: #185abc;
+    color: white;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.return-book-btn:hover {
+    background: #0d47a1;
+}
+
+.return-book-btn:disabled {
+    background: #aaa;
+    cursor: not-allowed;
+}
+
+.no-return-books {
+    background: white;
+    padding: 40px;
+    border-radius: 12px;
+    text-align: center;
+    color: #666;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+}
+
+.return-loading {
+    text-align: center;
+    padding: 50px;
+    font-size: 20px;
+    color: #555;
+}
+
+@media (max-width: 768px) {
+    .return-book-page {
+        padding: 25px 20px;
+    }
+
+    .return-book-container h1 {
+        font-size: 28px;
+    }
+
+    .return-book-list {
+        grid-template-columns: 1fr;
+    }
+}

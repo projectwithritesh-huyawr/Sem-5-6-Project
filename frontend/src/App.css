@@ -1,0 +1,25 @@
+#root{
+    width: 100%;
+}
+
+.brand-title {
+    color: #111827;
+    font-size: 22px;
+    font-weight: 800;
+    line-height: 1.08;
+    text-align: center;
+    text-shadow: none;
+}
+
+.brand-title span {
+    display: table;
+    margin: 2px auto;
+    padding: 0 4px;
+    background: #ffd54f;
+}
+
+@media (max-width: 768px) {
+    .brand-title {
+        font-size: 19px;
+    }
+}

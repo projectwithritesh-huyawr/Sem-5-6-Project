@@ -1,0 +1,29 @@
+.register-page { min-height:100vh; position:relative; overflow:auto; display:grid; place-items:center; padding:32px; background:#f4efe7; color:#19231f; font-family:Georgia, "Times New Roman", serif; }
+.register-page::before { content:""; position:absolute; inset:0; opacity:.45; background-image:radial-gradient(#c8bda9 1px, transparent 1px); background-size:24px 24px; }
+.register-orbit { position:absolute; border:1px solid rgba(49,91,72,.2); border-radius:50%; animation:register-float 9s ease-in-out infinite; }
+.register-orbit-one { width:520px; height:520px; top:-250px; right:-130px; }
+.register-orbit-two { width:360px; height:360px; bottom:-190px; left:-120px; animation-delay:-3s; }
+.register-shell { position:relative; z-index:1; display:grid; grid-template-columns:1fr 1.05fr; width:min(980px,100%); overflow:hidden; border:1px solid rgba(25,35,31,.1); border-radius:22px; background:#fffdf9; box-shadow:0 24px 70px rgba(67,55,40,.18); animation:register-appear .7s ease both; }
+.register-intro { position:relative; overflow:hidden; min-height:620px; padding:58px 52px; background:#315b48; color:#f8f2e9; }
+.register-intro::after { content:""; position:absolute; width:330px; height:330px; right:-150px; bottom:-130px; border:1px solid rgba(248,242,233,.3); border-radius:50%; box-shadow:0 0 0 28px rgba(248,242,233,.06),0 0 0 56px rgba(248,242,233,.05); }
+.register-brand-mark { display:grid; place-items:center; width:42px; height:42px; border:1px solid #e9c46a; border-radius:50%; color:#e9c46a; font-size:23px; font-weight:bold; }
+.register-eyebrow { margin:24px 0 14px; color:#b7cdbd; font:600 11px/1.2 Arial,sans-serif; letter-spacing:2px; }
+.register-intro h1 { margin:0; font-size:clamp(40px,5vw,62px); line-height:1.02; font-weight:400; }
+.register-intro-copy { max-width:310px; margin-top:28px; color:#d8e5da; font:16px/1.6 Arial,sans-serif; }
+.register-book-stacks { position:absolute; bottom:54px; left:52px; display:flex; align-items:flex-end; gap:8px; }
+.register-book-stacks span { display:block; width:24px; border-radius:3px 3px 0 0; background:#e9c46a; }
+.register-book-stacks span:nth-child(1) { height:70px; }.register-book-stacks span:nth-child(2) { height:102px; background:#e28f72; }.register-book-stacks span:nth-child(3) { height:84px; background:#d8e5da; }
+.register-box { align-self:center; padding:48px 58px; text-align:left; }
+.register-heading .register-eyebrow { margin:0 0 14px; color:#b07442; }
+.register-box h2 { margin:0; color:#19231f; font-size:32px; font-weight:400; }
+.register-heading > p:last-child { margin:10px 0 20px; color:#7a817b; font:14px Arial,sans-serif; }
+.register-box label { display:block; margin:14px 0 6px; color:#3e4942; font:600 12px Arial,sans-serif; }
+.register-box input { box-sizing:border-box; width:100%; padding:11px 0; border:0; border-bottom:1px solid #cfd2cc; border-radius:0; outline:none; background:transparent; color:#19231f; font:15px Arial,sans-serif; }
+.register-box input:focus { border-color:#315b48; }
+.register-submit { display:flex; align-items:center; justify-content:space-between; width:100%; margin-top:25px; padding:14px 18px; border:0; border-radius:5px; background:#e28f72; color:#fffdf9; cursor:pointer; font:600 14px Arial,sans-serif; transition:transform .2s,background .2s; }
+.register-submit:hover { transform:translateY(-2px); background:#cf765b; }
+.register-login-prompt { margin:22px 0 0; color:#7a817b; text-align:center; font:13px Arial,sans-serif; }
+.register-login-prompt a { color:#315b48; font-weight:bold; text-decoration:none; }
+@keyframes register-appear { from { opacity:0; transform:translateY(18px); } to { opacity:1; transform:translateY(0); } }
+@keyframes register-float { 0%,100% { transform:translate(0,0) rotate(0); } 50% { transform:translate(12px,16px) rotate(5deg); } }
+@media (max-width:760px) { .register-page { padding:18px; } .register-shell { grid-template-columns:1fr; } .register-intro { min-height:240px; padding:34px 30px; } .register-intro h1 { font-size:42px; } .register-intro-copy,.register-book-stacks { display:none; } .register-box { padding:34px 30px 40px; } }
