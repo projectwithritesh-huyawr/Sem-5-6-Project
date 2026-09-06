@@ -92,6 +92,11 @@ function Sidebar({
               </NavLink>
             </li>
             <li>
+              <NavLink className={({ isActive }) => isActive ? "active" : ""} to="/book-requests">
+                Book Requests
+              </NavLink>
+            </li>
+            <li>
               <NavLink className={({ isActive }) => isActive ? "active" : ""} to="/fines">
                 Fine Management
               </NavLink>

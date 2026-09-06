@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { apiUrl } from "../services/api";
 import "../css/Header.css";
 
@@ -26,6 +27,9 @@ function Header({
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [passwordMessage, setPasswordMessage] = useState("");
+  const [showPasswords, setShowPasswords] = useState(false);
+  const [bookRequests, setBookRequests] = useState([]);
+  const [showNotifications, setShowNotifications] = useState(false);
   const hasCustomProfileImage = Boolean(
     localStorage.getItem(profileImageKey) || localStorage.getItem("profileImage")
   );
@@ -38,6 +42,27 @@ function Header({
     window.addEventListener("profileImageChanged", syncProfileImage);
     return () => window.removeEventListener("profileImageChanged", syncProfileImage);
   }, [profileImageKey]);
+
+  useEffect(() => {
+    if (role !== "admin" && role !== "student") return undefined;
+
+    const fetchBookNotifications = async () => {
+      try {
+        const endpoint = role === "admin"
+          ? "getBookRequests.php"
+          : `getBookNotifications.php?studentId=${encodeURIComponent(localStorage.getItem("studentId") || "")}`;
+        const response = await fetch(apiUrl(endpoint));
+        const data = await response.json();
+        setBookRequests(Array.isArray(data) ? data : []);
+      } catch (error) {
+        console.log("Book Request Notification Error:", error);
+      }
+    };
+
+    fetchBookNotifications();
+    const requestRefresh = setInterval(fetchBookNotifications, 15000);
+    return () => clearInterval(requestRefresh);
+  }, [role]);
 
   const profileDetails = role === "student"
     ? [
@@ -64,13 +89,17 @@ function Header({
     event.preventDefault();
     setPasswordMessage("");
 
-    if (newPassword.length < 6) {
-      setPasswordMessage("New password must be at least 6 characters.");
+    if (newPassword.length < 3) {
+      const message = "New password must be at least 3 characters.";
+      setPasswordMessage(message);
+      window.alert(message);
       return;
     }
 
     if (newPassword !== confirmPassword) {
-      setPasswordMessage("New passwords do not match.");
+      const message = "New passwords do not match.";
+      setPasswordMessage(message);
+      window.alert(message);
       return;
     }
 
@@ -87,8 +116,23 @@ function Header({
           })
         }
       );
-      const result = await response.json();
+      const responseText = await response.text();
+      let result;
+
+      try {
+        result = JSON.parse(responseText);
+      } catch {
+        throw new Error(
+          responseText.trim() || "Password service returned an invalid response."
+        );
+      }
+
+      if (!response.ok) {
+        throw new Error(result.message || "Password change failed.");
+      }
+
       setPasswordMessage(result.message);
+      window.alert(result.message);
 
       if (result.status === "success") {
         setCurrentPassword("");
@@ -96,7 +140,9 @@ function Header({
         setConfirmPassword("");
       }
     } catch (error) {
-      setPasswordMessage("Unable to change password right now.");
+      const message = error.message || "Unable to change password right now.";
+      setPasswordMessage(message);
+      window.alert(message);
     }
   };
 
@@ -118,9 +164,51 @@ function Header({
           placeholder="Search..."
         />
 
-        <span className="notification">
-          🔔
-        </span>
+        {(role === "admin" || role === "student") && (
+          <div className="notification-wrapper">
+            <button
+              className="notification"
+              type="button"
+              onClick={() => setShowNotifications((isOpen) => !isOpen)}
+              aria-label={`Open book notifications${bookRequests.length ? `, ${bookRequests.length} new` : ""}`}
+              aria-expanded={showNotifications}
+            >
+              🔔
+              {bookRequests.length > 0 && (
+                <span className="notification-count">{bookRequests.length}</span>
+              )}
+            </button>
+
+            {showNotifications && (
+              <div className="notification-dropdown">
+                <div className="notification-dropdown-header">
+                  <strong>{role === "admin" ? "Book Requests" : "Book Notifications"}</strong>
+                  <span>{bookRequests.length} {role === "admin" ? "pending" : "new"}</span>
+                </div>
+                {bookRequests.length > 0 ? (
+                  bookRequests.slice(0, 5).map((request) => (
+                    <div className="book-request-notification" key={request._id}>
+                      <strong>{role === "admin" ? request.studentName : "Book request rejected"}</strong>
+                      <span>{request.bookTitle}</span>
+                      {role === "student" && <em>Reason: {request.rejectionReason}</em>}
+                    </div>
+                  ))
+                ) : (
+                  <p className="no-notifications">No pending book requests</p>
+                )}
+                {role === "admin" && (
+                  <Link
+                    className="view-requests-link"
+                    to="/book-requests"
+                    onClick={() => setShowNotifications(false)}
+                  >
+                    View all requests
+                  </Link>
+                )}
+              </div>
+            )}
+          </div>
+        )}
 
         <button
           className="profile-button"
@@ -175,28 +263,36 @@ function Header({
             <form className="password-form" onSubmit={changePassword}>
               <h3>Change Password</h3>
               <input
-                type="password"
+                type={showPasswords ? "text" : "password"}
                 placeholder="Current password"
                 value={currentPassword}
                 onChange={(event) => setCurrentPassword(event.target.value)}
                 required
               />
               <input
-                type="password"
+                type={showPasswords ? "text" : "password"}
                 placeholder="New password"
                 value={newPassword}
                 onChange={(event) => setNewPassword(event.target.value)}
-                minLength="6"
+                minLength="3"
                 required
               />
               <input
-                type="password"
+                type={showPasswords ? "text" : "password"}
                 placeholder="Confirm new password"
                 value={confirmPassword}
                 onChange={(event) => setConfirmPassword(event.target.value)}
-                minLength="6"
+                minLength="3"
                 required
               />
+              <label className="show-password-toggle">
+                <input
+                  type="checkbox"
+                  checked={showPasswords}
+                  onChange={(event) => setShowPasswords(event.target.checked)}
+                />
+                Show password
+              </label>
               <button type="submit">Update password</button>
               {passwordMessage && <p className="password-message">{passwordMessage}</p>}
             </form>

@@ -25,10 +25,10 @@ if ($username === "" || $currentPassword === "" || $newPassword === "") {
     exit();
 }
 
-if (strlen($newPassword) < 6) {
+if (strlen($newPassword) < 3) {
     echo json_encode([
         "status" => "error",
-        "message" => "New password must be at least 6 characters"
+        "message" => "New password must be at least 3 characters"
     ]);
     exit();
 }
@@ -54,7 +54,7 @@ try {
 
     $db->users->updateOne(
         ["_id" => $user["_id"]],
-        ["$set" => ["password" => password_hash($newPassword, PASSWORD_DEFAULT)]]
+        ['$set' => ["password" => password_hash($newPassword, PASSWORD_DEFAULT)]]
     );
 
     echo json_encode([

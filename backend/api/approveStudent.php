@@ -39,6 +39,14 @@ try {
 
     if ($result->getModifiedCount() > 0) {
 
+        $approvedUser = $db->users->findOne(["_id" => $objectId]);
+        if (!empty($approvedUser["studentId"])) {
+            $db->students->updateOne(
+                ["_id" => new MongoDB\BSON\ObjectId($approvedUser["studentId"])],
+                ['$set' => ["status" => "approved"]]
+            );
+        }
+
         echo json_encode([
             "status" => "success",
             "message" => "Student approved successfully"

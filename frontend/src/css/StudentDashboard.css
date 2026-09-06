@@ -30,6 +30,91 @@
     font-size: 16px;
 }
 
+.student-request-section {
+    margin-bottom: 25px;
+    padding: 22px 30px;
+    border-radius: 12px;
+    background: #fff;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, .08);
+}
+
+.student-request-section h2 {
+    margin: 0 0 6px;
+    color: #0d47a1;
+}
+
+.student-request-section p {
+    margin: 0 0 16px;
+    color: #66717d;
+}
+
+.student-request-form {
+    display: flex;
+    gap: 12px;
+}
+
+.student-request-form select,
+.student-request-form input {
+    min-height: 42px;
+    padding: 8px 10px;
+    border: 1px solid #cfd8e3;
+    border-radius: 6px;
+    background: #fff;
+}
+
+.student-request-form select {
+    flex: 1;
+}
+
+.student-request-form button,
+.student-return-button {
+    border: 0;
+    border-radius: 6px;
+    background: #0d47a1;
+    color: #fff;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.student-request-form button {
+    padding: 0 16px;
+}
+
+.student-return-button {
+    padding: 8px 12px;
+}
+
+.student-due-soon-alert {
+    margin-bottom: 25px;
+    padding: 18px 24px;
+    border-left: 5px solid #e09f3e;
+    border-radius: 10px;
+    background: #fff8e8;
+    color: #5c4215;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, .06);
+}
+
+.student-due-soon-alert h2 {
+    margin: 0 0 6px;
+    font-size: 20px;
+}
+
+.student-due-soon-alert p {
+    margin: 0 0 12px;
+}
+
+.due-soon-book {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 8px 0;
+    border-top: 1px solid rgba(224, 159, 62, .25);
+}
+
+.due-soon-book span {
+    white-space: nowrap;
+}
+
 
 /* Profile */
 .student-profile {
@@ -254,6 +339,14 @@
 
     .student-profile-picture {
         align-items:flex-start;
+    }
+
+    .student-request-form {
+        flex-direction: column;
+    }
+
+    .student-request-form button {
+        min-height: 42px;
     }
 }
 /* Student Statistics Cards */

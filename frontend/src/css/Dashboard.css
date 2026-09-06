@@ -8,6 +8,30 @@
   animation: content-enter .55s ease both;
 }
 
+.book-request-notice {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 20px;
+  padding: 14px 18px;
+  border-left: 5px solid #e09f3e;
+  border-radius: 8px;
+  background: #fff8e8;
+  color: #704b0b;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.book-request-notice span {
+  display: grid;
+  width: 25px;
+  height: 25px;
+  place-items: center;
+  border-radius: 50%;
+  background: #e09f3e;
+  color: #fff;
+}
+
 .dashboard-content h1 {
   margin-bottom: 30px;
 }

@@ -1,0 +1,66 @@
+.book-requests-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 90%;
+  max-width: 1100px;
+  margin: 20px auto;
+}
+
+.book-requests-header h1 { margin: 0 0 6px; color: #17212b; }
+.book-requests-header p { margin: 0; color: #66717d; }
+.book-requests-header strong {
+  padding: 9px 13px;
+  border-radius: 18px;
+  background: #fff3d6;
+  color: #8a5a00;
+}
+
+.book-requests-table {
+  width: 90%;
+  max-width: 1100px;
+  margin: 30px auto;
+  padding: 20px;
+  overflow-x: auto;
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, .12);
+}
+
+.book-requests-table table { width: 100%; border-collapse: collapse; min-width: 760px; }
+.book-requests-table th { padding: 14px; background: #0d47a1; color: #fff; text-align: left; }
+.book-requests-table td { padding: 14px; border-bottom: 1px solid #e1e5ea; color: #303943; }
+.book-requests-table button { margin-right: 8px; padding: 8px 11px; border: 0; border-radius: 5px; cursor: pointer; font-weight: 600; }
+.request-approve { background: #208b4e; color: #fff; }
+.request-reject { background: #dc3545; color: #fff; }
+.no-book-requests { padding: 28px !important; text-align: center; color: #687582; }
+
+.rejection-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  background: rgba(25, 35, 31, .4);
+}
+
+.rejection-dialog {
+  width: min(430px, 100%);
+  padding: 24px;
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: 0 18px 45px rgba(0, 0, 0, .25);
+}
+
+.rejection-dialog h2 { margin: 0 0 8px; color: #202a33; }
+.rejection-dialog p { margin: 0 0 18px; color: #66717d; }
+.rejection-dialog label { display: block; margin-bottom: 7px; color: #303943; font-weight: 600; }
+.rejection-dialog textarea { box-sizing: border-box; width: 100%; padding: 10px; border: 1px solid #cfd8e3; border-radius: 6px; resize: vertical; }
+.rejection-actions { display: flex; justify-content: flex-end; gap: 10px; margin-top: 16px; }
+.rejection-actions button { padding: 9px 13px; border: 0; border-radius: 5px; cursor: pointer; font-weight: 600; }
+.rejection-actions button:first-child { background: #edf0f2; color: #3c4650; }
+
+@media (max-width: 700px) {
+  .book-requests-header { align-items: flex-start; flex-direction: column; gap: 12px; }
+}

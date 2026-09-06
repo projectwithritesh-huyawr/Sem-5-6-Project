@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Header from "../components/Header";
 import Sidebar from "../components/Sidebar";
+import { Link } from "react-router-dom";
 import { apiUrl } from "../services/api";
 import "../css/Dashboard.css";
 
@@ -14,10 +15,22 @@ function AdminDashboard() {
   });
 
   const [recentActivity, setRecentActivity] = useState([]);
+  const [pendingRequests, setPendingRequests] = useState(0);
 
   useEffect(() => {
     fetchDashboardStats();
+    fetchPendingRequests();
   }, []);
+
+  const fetchPendingRequests = async () => {
+    try {
+      const response = await fetch(apiUrl("getBookRequests.php"));
+      const data = await response.json();
+      setPendingRequests(Array.isArray(data) ? data.length : 0);
+    } catch (error) {
+      console.log("Book Requests Error:", error);
+    }
+  };
 
   const fetchDashboardStats = async () => {
 
@@ -55,6 +68,13 @@ function AdminDashboard() {
       <div className="dashboard-content">
 
         <Header />
+
+        {pendingRequests > 0 && (
+          <Link className="book-request-notice" to="/book-requests">
+            <span aria-hidden="true">✓</span>
+            {pendingRequests} student book request(s) waiting for admin approval
+          </Link>
+        )}
 
         {/* Dashboard Cards */}
 

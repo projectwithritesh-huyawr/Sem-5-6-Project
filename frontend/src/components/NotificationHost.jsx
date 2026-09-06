@@ -50,7 +50,7 @@ function NotificationHost() {
     <div className="notification-host" role="status" aria-live="polite">
       {notice && (
         <div className="site-notification">
-          <div className="site-notification-icon">i</div>
+          <div className="site-notification-icon" aria-hidden="true">✓</div>
           <div>
             <h2>{notice.title}</h2>
             <p>{notice.text}</p>

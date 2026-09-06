@@ -39,6 +39,14 @@ try {
 
     if ($result->getModifiedCount() > 0) {
 
+        $rejectedUser = $db->users->findOne(["_id" => $objectId]);
+        if (!empty($rejectedUser["studentId"])) {
+            $db->students->updateOne(
+                ["_id" => new MongoDB\BSON\ObjectId($rejectedUser["studentId"])],
+                ['$set' => ["status" => "rejected"]]
+            );
+        }
+
         echo json_encode([
             "status" => "success",
             "message" => "Student rejected successfully"

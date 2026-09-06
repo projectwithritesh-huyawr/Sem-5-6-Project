@@ -12,6 +12,7 @@ import StudentDashboard from "./pages/StudentDashboard";
  import Fines from "./pages/Fines"; 
 import RejectedStudents from "./pages/RejectedStudents";
 import ReturnBook from "./pages/Returnbook";
+import BookRequests from "./pages/BookRequests";
 import NotificationHost from "./components/NotificationHost";
 
 function App() {
@@ -33,6 +34,7 @@ function App() {
         <Route path="/pending-students"element={<PendingStudents />}/>
         <Route path="/rejected-students"element={<RejectedStudents />}/>
         <Route path="/returnbook" element={<ReturnBook />} />
+        <Route path="/book-requests" element={<BookRequests />} />
       </Routes>
     </BrowserRouter>
   );

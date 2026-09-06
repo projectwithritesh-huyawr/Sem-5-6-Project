@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Header from "../components/Header";
 import BackButton from "../components/BackButton";
+import { requestConfirmation } from "../components/NotificationHost";
 import { apiUrl } from "../services/api";
 import "../css/StudentDashboard.css";
 
@@ -11,6 +12,9 @@ function StudentDashboard() {
   const [issuedBooks, setIssuedBooks] = useState([]);
   const [loading, setLoading] = useState(true);
   const [profileImage, setProfileImage] = useState(defaultProfileImage);
+  const [availableBooks, setAvailableBooks] = useState([]);
+  const [requestBookId, setRequestBookId] = useState("");
+  const [requestReturnDate, setRequestReturnDate] = useState("");
 
   const getProfileImageKey = () =>
     `profileImage_student_${localStorage.getItem("studentId") || "guest"}`;
@@ -29,7 +33,92 @@ function StudentDashboard() {
 
   useEffect(() => {
     fetchStudentDashboard();
+    fetchAvailableBooks();
   }, []);
+
+  const fetchAvailableBooks = async () => {
+    try {
+      const response = await fetch(apiUrl("getBooks.php"));
+      const data = await response.json();
+      setAvailableBooks(Array.isArray(data) ? data : []);
+    } catch (error) {
+      console.log("Available Books Error:", error);
+    }
+  };
+
+  const requestBook = async (event) => {
+    event.preventDefault();
+    try {
+      const response = await fetch(apiUrl("requestBook.php"), {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          studentId: localStorage.getItem("studentId"),
+          bookId: requestBookId,
+          returnDate: requestReturnDate
+        })
+      });
+      const result = await response.json();
+      alert(result.message);
+      if (result.status === "success") {
+        setRequestBookId("");
+        setRequestReturnDate("");
+      }
+    } catch (error) {
+      alert("Unable to send book request");
+    }
+  };
+
+  const returnBook = async (bookId) => {
+    const confirmed = await requestConfirmation("Are you sure you want to return this book?");
+    if (!confirmed) return;
+
+    try {
+      const response = await fetch(apiUrl("returnBook.php"), {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ id: bookId })
+      });
+      const result = await response.json();
+      alert(result.message);
+      if (result.status === "success") {
+        fetchStudentDashboard();
+        fetchAvailableBooks();
+      }
+    } catch (error) {
+      alert("Unable to return book");
+    }
+  };
+
+  useEffect(() => {
+    const upcomingBooks = issuedBooks.filter((book) => {
+      if (book.status !== "Issued" || !book.returnDate) return false;
+
+      const dueDate = new Date(book.returnDate);
+      const today = new Date();
+      dueDate.setHours(0, 0, 0, 0);
+      today.setHours(0, 0, 0, 0);
+
+      const daysUntilDue = Math.ceil(
+        (dueDate.getTime() - today.getTime()) / (1000 * 60 * 60 * 24)
+      );
+
+      return daysUntilDue >= 0 && daysUntilDue <= 3;
+    });
+
+    if (upcomingBooks.length > 0) {
+      const firstBook = upcomingBooks[0];
+      const dueDate = new Date(firstBook.returnDate);
+      const today = new Date();
+      dueDate.setHours(0, 0, 0, 0);
+      today.setHours(0, 0, 0, 0);
+      const daysUntilDue = Math.ceil(
+        (dueDate.getTime() - today.getTime()) / (1000 * 60 * 60 * 24)
+      );
+      const dueText = daysUntilDue === 0 ? "today" : `in ${daysUntilDue} day(s)`;
+      alert(`${upcomingBooks.length} book(s) due soon. ${firstBook.bookTitle} is due ${dueText}.`);
+    }
+  }, [issuedBooks]);
 
   const fetchStudentDashboard = async () => {
     try {
@@ -185,6 +274,18 @@ function StudentDashboard() {
       calculateLateDays(book) > 0
   );
 
+  const dueSoonBooks = issuedBooks.filter((book) => {
+    if (book.status !== "Issued" || !book.returnDate) return false;
+    const dueDate = new Date(book.returnDate);
+    const today = new Date();
+    dueDate.setHours(0, 0, 0, 0);
+    today.setHours(0, 0, 0, 0);
+    const daysUntilDue = Math.ceil(
+      (dueDate.getTime() - today.getTime()) / (1000 * 60 * 60 * 24)
+    );
+    return daysUntilDue >= 0 && daysUntilDue <= 3;
+  });
+
   return (
     <div className="student-main-content">
 
@@ -208,6 +309,29 @@ function StudentDashboard() {
           Here is your library account information.
         </p>
 
+      </div>
+
+      <div className="student-request-section">
+        <h2>Request a Book</h2>
+        <p>Admin approval is required before the book is issued.</p>
+        <form onSubmit={requestBook} className="student-request-form">
+          <select value={requestBookId} onChange={(event) => setRequestBookId(event.target.value)} required>
+            <option value="">Select an available book</option>
+            {availableBooks.map((book) => (
+              <option key={book._id} value={book._id} disabled={Number(book.quantity) <= 0}>
+                {book.title} - Available: {book.quantity}
+              </option>
+            ))}
+          </select>
+          <input
+            type="date"
+            value={requestReturnDate}
+            onChange={(event) => setRequestReturnDate(event.target.value)}
+            min={new Date().toISOString().split("T")[0]}
+            required
+          />
+          <button type="submit">Send Request</button>
+        </form>
       </div>
 
 
@@ -309,6 +433,19 @@ function StudentDashboard() {
 
         </div>
 
+      )}
+
+      {dueSoonBooks.length > 0 && (
+        <div className="student-due-soon-alert">
+          <h2>Due Date Reminder</h2>
+          <p>{dueSoonBooks.length} issued book(s) are due within the next 3 days.</p>
+          {dueSoonBooks.map((book) => (
+            <div className="due-soon-book" key={book._id}>
+              <strong>{book.bookTitle}</strong>
+              <span>Due: {book.returnDate}</span>
+            </div>
+          ))}
+        </div>
       )}
 
 
@@ -448,6 +585,10 @@ function StudentDashboard() {
                   Status
                 </th>
 
+                <th>
+                  Action
+                </th>
+
               </tr>
 
             </thead>
@@ -475,7 +616,6 @@ function StudentDashboard() {
                       <td>
                         {book.bookTitle}
                       </td>
-
 
                       <td>
                         {book.issueDate || "-"}
@@ -530,6 +670,14 @@ function StudentDashboard() {
 
                       </td>
 
+                      <td>
+                        {book.status === "Issued" && (
+                          <button className="student-return-button" onClick={() => returnBook(book._id)}>
+                            Return Book
+                          </button>
+                        )}
+                      </td>
+
                     </tr>
 
                   );
@@ -541,7 +689,7 @@ function StudentDashboard() {
                 <tr>
 
                   <td
-                    colSpan="7"
+                    colSpan="8"
                     className="student-no-books"
                   >
                     No Books Found

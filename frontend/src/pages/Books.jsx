@@ -8,6 +8,8 @@ import "../css/Books.css";
 
 function Books() {
   const [books, setBooks] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [categoryFilter, setCategoryFilter] = useState("all");
 
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
@@ -35,6 +37,16 @@ function Books() {
       console.log("Fetch Books Error:", error);
     }
   };
+
+  const categories = [...new Set(books.map((book) => book.category).filter(Boolean))].sort();
+  const filteredBooks = books.filter((book) => {
+    const searchText = searchTerm.trim().toLowerCase();
+    const matchesSearch = !searchText || [book.title, book.author, book.category]
+      .some((value) => String(value || "").toLowerCase().includes(searchText));
+    const matchesCategory = categoryFilter === "all" || book.category === categoryFilter;
+
+    return matchesSearch && matchesCategory;
+  });
 
   const handleDelete = async (id) => {
     const confirmDelete = await requestConfirmation(
@@ -100,6 +112,27 @@ function Books() {
         setEditId={setEditId}
       />
 
+      <div className="book-filters">
+        <input
+          type="search"
+          value={searchTerm}
+          onChange={(event) => setSearchTerm(event.target.value)}
+          placeholder="Search by title, author or category"
+          aria-label="Search books"
+        />
+        <select
+          value={categoryFilter}
+          onChange={(event) => setCategoryFilter(event.target.value)}
+          aria-label="Filter books by category"
+        >
+          <option value="all">All categories</option>
+          {categories.map((bookCategory) => (
+            <option key={bookCategory} value={bookCategory}>{bookCategory}</option>
+          ))}
+        </select>
+        <span className="book-result-count">{filteredBooks.length} book(s)</span>
+      </div>
+
       <div className="book-table">
 
         <table>
@@ -113,6 +146,7 @@ function Books() {
               <th>Total</th>
               <th>Available</th>
               <th>Issued</th>
+              <th>Status</th>
               <th>Action</th>
             </tr>
 
@@ -120,9 +154,9 @@ function Books() {
 
           <tbody>
 
-            {books.length > 0 ? (
+            {filteredBooks.length > 0 ? (
 
-              books.map((book) => {
+              filteredBooks.map((book) => {
 
                 const total = Number(book.totalQuantity ?? book.quantity ?? 0);
 
@@ -147,6 +181,12 @@ function Books() {
                     <td>{available}</td>
 
                     <td>{issued}</td>
+
+                    <td>
+                      <span className={`availability-status ${available > 0 ? "available" : "unavailable"}`}>
+                        {available > 0 ? "Available" : "Unavailable"}
+                      </span>
+                    </td>
 
                     <td>
 
@@ -188,10 +228,10 @@ function Books() {
               <tr>
 
                 <td
-                  colSpan="7"
+                  colSpan="8"
                   style={{ textAlign: "center" }}
                 >
-                  No Books Found
+                        {books.length > 0 ? "No matching books" : "No Books Found"}
                 </td>
 
               </tr>
